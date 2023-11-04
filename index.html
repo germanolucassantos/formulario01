@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <label for="name">CEP:</label>
+                <input onblur="buscarCep()" type="text" id="cep" placeholder="digite seu cep">
+                <label for="name">LOGRADOURO:</label>
+                <input type="text" id="log" placeholder="digite aqui">
+                <label for="name">NUMERO:</label>
+                <input type="text" id="numero" placeholder="digite aqui">
+                <label for="name">BAIRRO:</label>
+                <input type="text" id="bairro" placeholder="Digite aqui">
+                <label for="name">CIDADE:</label>
+                <input type="text" id="cidade" placeholder="digite sua aqui">
+                <label for="name">UF:</label>
+                <input type="text" id="uf" placeholder="digite aqui ">
+                <label for="name">PAÍS:</label>
+                <input type="text" id="pais" placeholder="digite aqui">
+
+                <button class="btn btn-primary  w-100">
+                    ENVIAR
+                </button>
+            </div>
+</body>
+
+<script>
+    function buscarCep() {
+        log.value = "";
+        bairro.value = "";
+        cidade.value = "";
+        uf.value = "";
+
+        pais.value = "Brasil";
+        fetch (`https:/viacep.com.br/ws/${cep.value}/json`)
+        .then(function (resposta) {
+            return resposta.json();
+        })
+        .then(function (conteudo) {
+            log.value = conteudo.logradouro;
+            bairro.value = conteudo.bairro;
+            cidade.value = conteudo.localidade;
+            uf.value = conteudo.uf;
+            pais.value = "Brasil"
+        });
+
+    }
+</script>
+</html>
